@@ -1,0 +1,12 @@
+Gestion de groupes de travail
+
+but: aider les professeurs qui ont beaucoup de groupes à gérer
+(en gros reprendre les diverses fonctinnalités du site odin mais sur téléphone car plus pratique pour se balader dans la classe)
+
+fonctionnalités:
+- ajouter/supprimer des élèves
+- définir des groupes
+- planifier les horaries du professeur / emploi du temps
+- système de notation des élèves
+- fiches de présences / gestion absences
+- emprunts de matériels avec un date d'expiration
