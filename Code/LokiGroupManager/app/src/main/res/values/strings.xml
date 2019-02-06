@@ -16,4 +16,12 @@
     <string name="nav_info">About us</string>
 
     <string name="action_settings">Settings</string>
+
+    <!-- About us Activity -->
+    <string name="title_activity_about_us">About Us</string>
+    <string name="about_us_title">We are two students from DUT Informatique</string>
+
+    <!-- Settings Activity -->
+    <string name="title_activity_settings">Settings</string>
+    <string name="settings_title">Change the differents settings</string>
 </resources>

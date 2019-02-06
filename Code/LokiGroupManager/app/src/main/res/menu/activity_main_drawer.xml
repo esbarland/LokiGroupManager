@@ -28,11 +28,13 @@
                 <item
                     android:id="@+id/nav_settings"
                     android:icon="@drawable/ic_menu_settings"
-                    android:title="@string/nav_settings" />
+                    android:title="@string/nav_settings"
+                    android:onClick="clickeventSettings"/>
                 <item
                     android:id="@+id/nav_info"
                     android:icon="@drawable/ic_menu_info"
-                    android:title="@string/nav_info" />
+                    android:title="@string/nav_info"
+                    android:onClick="clickeventAboutUs"/>
             </group>
         </menu>
     </item>

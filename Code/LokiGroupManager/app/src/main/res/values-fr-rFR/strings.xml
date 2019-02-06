@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Loki Group Manager</string>
+
+    <!-- Navigation View -->
+    <string name="nav_header_title">Loki Group Manager</string>
+    <string name="nav_header_subtitle">Bienvenue !</string>
+    <string name="nav_header_desc">Menu de navigation</string>
+    <string name="nav_users">Utilisateurs</string>
+    <string name="nav_groups">Groupes</string>
+    <string name="nav_schedule">Emploi du temps</string>
+    <string name="nav_reminder">Rappels</string>
+    <string name="nav_title_options">Options</string>
+    <string name="nav_settings">Paramètres</string>
+    <string name="nav_info">A propos de nous</string>
+
+    <string name="action_settings">Paramètres</string>
+
+    <!-- About us Activity -->
+    <string name="title_activity_about_us">A propos de nous</string>
+    <string name="about_us_title">Nous sommes 2 étudiants en DUT Informatique</string>
+
+    <!-- Settings Activity -->
+    <string name="title_activity_settings">Paramètres</string>
+    <string name="settings_title">Changer les paramètres de l\'application</string>
+    <string name="navigation_drawer_open">Ouverture de la navigation</string>
+    <string name="navigation_drawer_close">Fermeture de la navigation</string>
+</resources>

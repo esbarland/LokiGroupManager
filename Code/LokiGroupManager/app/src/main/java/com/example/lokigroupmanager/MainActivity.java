@@ -1,17 +1,20 @@
 package com.example.lokigroupmanager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -86,12 +89,18 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         switch(id){
-            case R.id.nav_users: break;
-            case R.id.nav_groups: break;
-            case R.id.nav_schedule: break;
-            case R.id.nav_reminder: break;
-            case R.id.nav_settings: break;
-            case R.id.nav_info: break;
+            case R.id.nav_users:
+                break;
+            case R.id.nav_groups:
+                break;
+            case R.id.nav_schedule:
+                break;
+            case R.id.nav_reminder:
+                break;
+            case R.id.nav_settings:
+                break;
+            case R.id.nav_info:
+                break;
         }
         /*
         if (id == R.id.nav_users) {
@@ -108,8 +117,26 @@ public class MainActivity extends AppCompatActivity
 
         }
         */
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    /**
+     * Event handle when press on settings option
+     * @param item Menu
+     */
+    public void clickeventSettings(MenuItem item) {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * Event handle when press on about us option
+     * @param item Menu
+     */
+    public void clickeventAboutUs(MenuItem item) {
+        Intent intent = new Intent(this, AboutUsActivity.class);
+        startActivity(intent);
     }
 }
