@@ -1,7 +1,9 @@
-package com.example.lokigroupmanager;
+package com.example.lokigroupmanager.OptionsActivity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.lokigroupmanager.R;
 
 public class SettingsActivity extends AppCompatActivity {
 

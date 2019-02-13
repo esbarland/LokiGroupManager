@@ -7,19 +7,23 @@
         <item
             android:id="@+id/nav_users"
             android:icon="@drawable/ic_menu_person"
-            android:title="@string/nav_users" />
+            android:title="@string/nav_users"
+            android:onClick="clickeventUsers"/>
         <item
             android:id="@+id/nav_groups"
             android:icon="@drawable/ic_menu_group"
-            android:title="@string/nav_groups" />
+            android:title="@string/nav_groups"
+            android:onClick="clickeventGroups"/>
         <item
             android:id="@+id/nav_schedule"
             android:icon="@drawable/ic_menu_date_range"
-            android:title="@string/nav_schedule" />
+            android:title="@string/nav_schedule"
+            android:onClick="clickeventSchedule"/>
         <item
             android:id="@+id/nav_reminder"
             android:icon="@drawable/ic_menu_notifications"
-            android:title="@string/nav_reminder" />
+            android:title="@string/nav_reminder"
+            android:onClick="clickeventReminder"/>
     </group>
 
     <item android:title="@string/nav_title_options">

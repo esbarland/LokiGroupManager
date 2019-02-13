@@ -25,4 +25,12 @@
     <string name="settings_title">Changer les paramètres de l\'application</string>
     <string name="navigation_drawer_open">Ouverture de la navigation</string>
     <string name="navigation_drawer_close">Fermeture de la navigation</string>
+    <string name="users_title">Liste des utilisateurs</string>
+    <string name="title_activity_users">Utilisateurs</string>
+    <string name="groups_title">Liste des groupes</string>
+    <string name="title_activity_groups">Groupes</string>
+    <string name="title_activity_schedule">Emploi du temps</string>
+    <string name="schedule_title">Emploi du temps</string>
+    <string name="reminder_title">Liste des rappels</string>
+    <string name="title_activity_reminder">Rappels</string>
 </resources>

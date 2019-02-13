@@ -10,11 +10,16 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
+
+import com.example.lokigroupmanager.BasicsActivity.GroupsActivity;
+import com.example.lokigroupmanager.BasicsActivity.ReminderActivity;
+import com.example.lokigroupmanager.BasicsActivity.ScheduleActivity;
+import com.example.lokigroupmanager.BasicsActivity.UsersActivity;
+import com.example.lokigroupmanager.OptionsActivity.AboutUsActivity;
+import com.example.lokigroupmanager.OptionsActivity.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -123,6 +128,12 @@ public class MainActivity extends AppCompatActivity
     }
 
     /**
+     *
+     * startActivity pas propre car ça écrase les données passées
+     *
+     */
+
+    /**
      * Event handle when press on settings option
      * @param item Menu
      */
@@ -139,4 +150,41 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(this, AboutUsActivity.class);
         startActivity(intent);
     }
+
+    /**
+     * Event handle when press on users option
+     * @param item Menu
+     */
+    public void clickeventUsers(MenuItem item) {
+        Intent intent = new Intent(this, UsersActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * Event handle when press on groups option
+     * @param item Menu
+     */
+    public void clickeventGroups(MenuItem item) {
+        Intent intent = new Intent(this, GroupsActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * Event handle when press on schedule option
+     * @param item Menu
+     */
+    public void clickeventSchedule(MenuItem item) {
+        Intent intent = new Intent(this, ScheduleActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * Event handle when press on reminder option
+     * @param item Menu
+     */
+    public void clickeventReminder(MenuItem item) {
+        Intent intent = new Intent(this, ReminderActivity.class);
+        startActivity(intent);
+    }
+
 }
