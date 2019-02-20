@@ -31,8 +31,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    ILoader loader = new StubDataManager();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,14 +55,6 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        List<Group> listGroups = loader.loadGroups();
-        for (Group group : listGroups) {
-            Log.d("ESTEBAN", group.getGroupName());
-            for (User user: group.getListUsers()) {
-                Log.d("ESTEBAN", user.getFirstname() + " - " + user.getSurname() + " - " + user.getEmail());
-            }
-        }
     }
 
     @Override

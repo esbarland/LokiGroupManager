@@ -42,5 +42,16 @@ public class Group implements Serializable {
         listUsers.remove(user);
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
 
+        sb.append("Group " + groupName + "\n");
+
+        for (User user : listUsers) {
+            sb.append(user.getFirstname() + " - " + user.getSurname() + " - " + user.getEmail() + "\n");
+        }
+
+        return sb.toString();
+    }
 }
