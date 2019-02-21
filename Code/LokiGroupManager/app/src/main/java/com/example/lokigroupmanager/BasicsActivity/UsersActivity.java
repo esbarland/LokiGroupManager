@@ -1,10 +1,15 @@
 package com.example.lokigroupmanager.BasicsActivity;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.lokigroupmanager.Dialogs.AddUserDialog;
 import com.example.lokigroupmanager.Modele.Group;
 import com.example.lokigroupmanager.Modele.User;
 import com.example.lokigroupmanager.Persistence.StubDataManager;
@@ -22,6 +27,15 @@ public class UsersActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users);
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.add);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddUserDialog dialog = new AddUserDialog();
+                //FragmentTransaction ft = getFragmentManager().beginTransaction();
+                dialog.show(getSupportFragmentManager(), AddUserDialog.TAG);
+            }
+        });
 
         listViewUsers = (ListView) findViewById(R.id.listUsers);
 

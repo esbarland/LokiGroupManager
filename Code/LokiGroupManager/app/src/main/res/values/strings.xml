@@ -33,6 +33,12 @@
     <string name="reminder_title">Reminder list</string>
     <string name="title_activity_reminder">Reminder</string>
     <string name="title_activity_login">Sign in</string>
+
+    <!-- Users Activity -->
+    <string name="firstname">First name</string>
+    <string name="surname">Surname</string>
+    <string name="email">Email</string>
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
