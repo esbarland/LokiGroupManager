@@ -26,6 +26,9 @@
     <string name="email">Email</string>
     <string name="save">Sauvegarder</string>
 
+    <!-- Errors -->
+    <string name="emptyfield">Erreur : Des champs sont vides</string>
+
     <!-- Settings Activity -->
     <string name="title_activity_settings">Paramètres</string>
     <string name="settings_title">Changer les paramètres de l\'application</string>

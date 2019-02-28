@@ -40,6 +40,9 @@
     <string name="email">Email</string>
     <string name="save">Save</string>
 
+    <!-- Errors -->
+    <string name="emptyfield">Error : Some fields are empty</string>
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
