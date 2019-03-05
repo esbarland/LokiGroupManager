@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.lokigroupmanager.Adapters.UserAdapter;
 import com.example.lokigroupmanager.Dialogs.AddUserDialog;
 import com.example.lokigroupmanager.Modele.Group;
 import com.example.lokigroupmanager.Modele.User;
@@ -16,17 +17,20 @@ import com.example.lokigroupmanager.Persistence.StubDataManager;
 import com.example.lokigroupmanager.R;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class UsersActivity extends AppCompatActivity implements AddUserDialog.AddUserDialogListener {
 
     private ListView listViewUsers;
-    private List<User> listAllUsers;
-    private ArrayAdapter<User> adapter;
+    private ArrayList<User> listAllUsers;
+    private UserAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_users);
 
         FloatingActionButton fab = findViewById(R.id.add);
@@ -40,19 +44,30 @@ public class UsersActivity extends AppCompatActivity implements AddUserDialog.Ad
 
         listViewUsers = findViewById(R.id.listUsers);
 
-        StubDataManager stub = new StubDataManager();
+        if(savedInstanceState != null){
+            listAllUsers = savedInstanceState.getParcelableArrayList("users");
+        }
+        else {
+            StubDataManager stub = new StubDataManager();
 
-        List<Group> listGroups = stub.loadGroups();
+            List<Group> listGroups = stub.loadGroups();
 
-        listAllUsers = new ArrayList<>();
+            listAllUsers = new ArrayList<>();
 
-        for (Group group : listGroups) {
-            listAllUsers.addAll(group.getListUsers());
+            for (Group group : listGroups) {
+                listAllUsers.addAll(group.getListUsers());
+            }
         }
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listAllUsers);
-
+        // Personal ListView Adapter for Users (see: UserAdapter class)
+        adapter = new UserAdapter(this, listAllUsers);
         listViewUsers.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putParcelableArrayList("users", listAllUsers);
+        super.onSaveInstanceState(outState);
     }
 
     /***
@@ -63,7 +78,10 @@ public class UsersActivity extends AppCompatActivity implements AddUserDialog.Ad
     @Override
     public void onFinishAddDialog(Bundle bundle) {
         if(bundle != null){
-            User u = new User(bundle.getString("firstname"), bundle.getString("surname"), bundle.getString("email"));
+            User u = new User(
+                    bundle.getString("firstname"),
+                    bundle.getString("surname"),
+                    bundle.getString("email"));
             listAllUsers.add(u);
             adapter.notifyDataSetChanged();
         }

@@ -7,12 +7,6 @@
     tools:context=".BasicsActivity.UsersActivity"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/users_title"
-        android:textSize="@dimen/default_font_size"/>
-
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
