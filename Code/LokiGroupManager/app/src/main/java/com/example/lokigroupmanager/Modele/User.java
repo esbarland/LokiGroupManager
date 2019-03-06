@@ -22,13 +22,13 @@ public class User implements Serializable, Parcelable {
     private String surname;
     private String email;
 
-    public User(String firstname, String surname, String email){
+    public User(String firstname, String surname, String email) {
         this.firstname = firstname;
         this.surname = surname;
         this.email = email;
     }
 
-    public User(Parcel in){
+    public User(Parcel in) {
         String[] values = new String[3];
         in.readStringArray(values);
         this.firstname = values[0];

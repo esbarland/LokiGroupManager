@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.lokigroupmanager.Adapters.GroupAdapter;
 import com.example.lokigroupmanager.Modele.Group;
 import com.example.lokigroupmanager.Persistence.StubDataManager;
 import com.example.lokigroupmanager.R;
@@ -30,7 +31,8 @@ public class GroupsActivity extends AppCompatActivity {
 
         List<Group> listGroups = stub.loadGroups();
 
-        ArrayAdapter<Group> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listGroups);
+        //ArrayAdapter<Group> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listGroups);
+        GroupAdapter adapter = new GroupAdapter(this, listGroups);
 
         listViewGroups.setAdapter(adapter);
 

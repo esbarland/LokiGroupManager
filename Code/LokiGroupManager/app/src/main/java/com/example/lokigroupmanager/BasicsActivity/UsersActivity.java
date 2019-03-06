@@ -2,11 +2,8 @@ package com.example.lokigroupmanager.BasicsActivity;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.lokigroupmanager.Adapters.UserAdapter;
@@ -17,7 +14,6 @@ import com.example.lokigroupmanager.Persistence.StubDataManager;
 import com.example.lokigroupmanager.R;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class UsersActivity extends AppCompatActivity implements AddUserDialog.AddUserDialogListener {

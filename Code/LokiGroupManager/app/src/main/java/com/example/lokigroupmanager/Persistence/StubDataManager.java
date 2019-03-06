@@ -27,7 +27,7 @@ public class StubDataManager implements ILoader {
             listUser1.add(user);
         }
 
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 4; i++) {
             String name = getSaltString();
             String reversedName = new StringBuilder(name).reverse().toString();
             String mail = name + "." + reversedName + "@etu.uca.fr";
