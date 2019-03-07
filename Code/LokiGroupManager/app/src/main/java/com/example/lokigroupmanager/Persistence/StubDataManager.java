@@ -1,14 +1,15 @@
 package com.example.lokigroupmanager.Persistence;
 
+import com.example.lokigroupmanager.Modele.Event;
 import com.example.lokigroupmanager.Modele.Group;
 import com.example.lokigroupmanager.Modele.User;
 
-import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-public class StubDataManager implements ILoader {
+public class StubDataManager implements ILoaderGroup, ILoaderEvent {
 
     @Override
     public List<Group> loadGroups() {
@@ -65,5 +66,16 @@ public class StubDataManager implements ILoader {
             salt.append(SALTCHARS.charAt(index));
         }
         return salt.toString();
+    }
+
+    @Override
+    public List<Event> loadEvents() {
+        final List<Event> listEvents = new ArrayList<>();
+
+        listEvents.add(new Event("gouter", "manger des gateaux", "maison", new Date(2019, 2, 8)));
+        listEvents.add(new Event("cinema", "regarder un film", "cinéma", new Date(2019, 2, 12)));
+        listEvents.add(new Event("bk", "manger fast food", "bk", new Date(2019, 2, 8)));
+
+        return listEvents;
     }
 }

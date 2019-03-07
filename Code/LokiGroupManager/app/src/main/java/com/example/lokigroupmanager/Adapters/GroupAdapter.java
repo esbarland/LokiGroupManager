@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -36,7 +37,6 @@ public class GroupAdapter extends ArrayAdapter<Group> {
 
         TextView groupView = view.findViewById(R.id.groupView);
         ListView listViewGroup = view.findViewById(R.id.listView);
-        listViewGroup.setMinimumHeight(500);
 
         Group group = listGroups.get(position);
 

@@ -10,7 +10,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,14 +18,8 @@ import com.example.lokigroupmanager.BasicsActivity.GroupsActivity;
 import com.example.lokigroupmanager.BasicsActivity.ReminderActivity;
 import com.example.lokigroupmanager.BasicsActivity.ScheduleActivity;
 import com.example.lokigroupmanager.BasicsActivity.UsersActivity;
-import com.example.lokigroupmanager.Modele.Group;
-import com.example.lokigroupmanager.Modele.User;
 import com.example.lokigroupmanager.OptionsActivity.AboutUsActivity;
 import com.example.lokigroupmanager.OptionsActivity.SettingsActivity;
-import com.example.lokigroupmanager.Persistence.ILoader;
-import com.example.lokigroupmanager.Persistence.StubDataManager;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

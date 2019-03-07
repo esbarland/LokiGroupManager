@@ -4,8 +4,8 @@ import com.example.lokigroupmanager.Modele.Group;
 
 import java.util.List;
 
-public interface ISaver {
+public interface ILoaderGroup {
 
-    void saveGroups(List<Group> listGroups);
+    List<Group> loadGroups();
 
 }
