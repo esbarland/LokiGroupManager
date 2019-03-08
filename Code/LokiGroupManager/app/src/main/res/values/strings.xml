@@ -40,6 +40,9 @@
     <string name="email">Email</string>
     <string name="save">Save</string>
 
+    <!-- Actions -->
+    <string name="delete">Delete</string>
+
     <!-- Errors -->
     <string name="emptyfield">Error : Some fields are empty</string>
 

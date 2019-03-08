@@ -26,6 +26,9 @@
     <string name="email">Email</string>
     <string name="save">Sauvegarder</string>
 
+    <!-- Actions -->
+    <string name="delete">Supprimer</string>
+
     <!-- Errors -->
     <string name="emptyfield">Erreur : Des champs sont vides</string>
 
