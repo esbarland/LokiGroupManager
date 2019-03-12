@@ -40,6 +40,10 @@
     <string name="email">Email</string>
     <string name="save">Save</string>
 
+    <!-- Group Activity -->
+    <string name="groupname">Group name</string>
+    <string name="description">Description</string>
+
     <!-- Actions -->
     <string name="delete">Delete</string>
 

@@ -46,9 +46,9 @@ public class StubDataManager implements ILoaderGroup, ILoaderEvent {
             listUser3.add(user);
         }
 
-        Group groupA = new Group(listUser1, "A");
-        Group groupB = new Group(listUser2, "B");
-        Group groupC = new Group(listUser3, "C");
+        Group groupA = new Group(listUser1, "A", "testA");
+        Group groupB = new Group(listUser2, "B", "testB");
+        Group groupC = new Group(listUser3, "C", "testC");
 
         listGroups.add(groupA);
         listGroups.add(groupB);

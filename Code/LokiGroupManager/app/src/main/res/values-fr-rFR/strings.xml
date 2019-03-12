@@ -26,6 +26,10 @@
     <string name="email">Email</string>
     <string name="save">Sauvegarder</string>
 
+    <!-- Group Activity -->
+    <string name="groupname">Nom du groupe</string>
+    <string name="description">Description</string>
+
     <!-- Actions -->
     <string name="delete">Supprimer</string>
 

@@ -1,6 +1,7 @@
 package com.example.lokigroupmanager.BasicsActivity;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
@@ -17,23 +18,26 @@ import com.example.lokigroupmanager.Modele.User;
 import com.example.lokigroupmanager.Persistence.StubDataManager;
 import com.example.lokigroupmanager.R;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UsersActivity extends AppCompatActivity implements AddUserDialog.AddUserDialogListener, UserInfoDialog.UserDeleteDialogListener {
 
     private ListView listViewUsers;
-    private ArrayList<User> listAllUsers;
+    private ArrayList<User> listAllUsers = new ArrayList<>();
     private UserAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         setContentView(R.layout.activity_users);
 
-        FloatingActionButton fab = findViewById(R.id.add);
+        FloatingActionButton fab = findViewById(R.id.add_user_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,6 +52,7 @@ public class UsersActivity extends AppCompatActivity implements AddUserDialog.Ad
             listAllUsers = savedInstanceState.getParcelableArrayList("users");
         }
         else {
+            /* STUB
             StubDataManager stub = new StubDataManager();
 
             List<Group> listGroups = stub.loadGroups();
@@ -56,6 +61,19 @@ public class UsersActivity extends AppCompatActivity implements AddUserDialog.Ad
 
             for (Group group : listGroups) {
                 listAllUsers.addAll(group.getListUsers());
+            }
+
+            */
+            // RESTORE USERS LIST FROM INTERNAL STORAGE
+            FileInputStream fis;
+            ObjectInputStream ois;
+
+            try {
+                fis = openFileInput("users");
+                ois = new ObjectInputStream(fis);
+                listAllUsers = (ArrayList<User>) ois.readObject();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
 
@@ -81,6 +99,29 @@ public class UsersActivity extends AppCompatActivity implements AddUserDialog.Ad
     protected void onSaveInstanceState(Bundle outState) {
         outState.putParcelableArrayList("users", listAllUsers);
         super.onSaveInstanceState(outState);
+    }
+
+    /***
+     * Save the users on stop
+     */
+    @Override
+    protected void onStop() {
+        FileOutputStream fileOutputStream;
+        ObjectOutputStream outputStream;
+
+        try {
+
+            fileOutputStream = openFileOutput("users", Context.MODE_PRIVATE);
+            outputStream = new ObjectOutputStream(fileOutputStream);
+            outputStream.writeObject(listAllUsers);
+
+            outputStream.close();
+            fileOutputStream.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        super.onStop();
     }
 
     /***

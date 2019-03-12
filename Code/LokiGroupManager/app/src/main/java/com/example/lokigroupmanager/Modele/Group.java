@@ -10,10 +10,12 @@ public class Group implements Serializable {
 
     private List<User> listUsers;
     private String groupName;
+    private String description;
 
-    public Group(List<User> listUsers, String groupName){
+    public Group(List<User> listUsers, String groupName, String description){
         this.listUsers = listUsers;
         this.groupName = groupName;
+        this.description = description;
     }
 
     public Collection<User> getListUsers() {
@@ -26,6 +28,14 @@ public class Group implements Serializable {
 
     public void setGroupName(String groupName) {
         this.groupName = groupName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void addToList(User user){
