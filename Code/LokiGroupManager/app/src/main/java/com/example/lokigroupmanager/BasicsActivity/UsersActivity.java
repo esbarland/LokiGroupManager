@@ -1,10 +1,8 @@
 package com.example.lokigroupmanager.BasicsActivity;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,18 +11,14 @@ import android.widget.ListView;
 import com.example.lokigroupmanager.Adapters.UserAdapter;
 import com.example.lokigroupmanager.Dialogs.AddUserDialog;
 import com.example.lokigroupmanager.Dialogs.UserInfoDialog;
-import com.example.lokigroupmanager.Modele.Group;
 import com.example.lokigroupmanager.Modele.User;
-import com.example.lokigroupmanager.Persistence.StubDataManager;
 import com.example.lokigroupmanager.R;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 public class UsersActivity extends AppCompatActivity implements AddUserDialog.AddUserDialogListener, UserInfoDialog.UserDeleteDialogListener {
 
@@ -64,6 +58,7 @@ public class UsersActivity extends AppCompatActivity implements AddUserDialog.Ad
             }
 
             */
+
             // RESTORE USERS LIST FROM INTERNAL STORAGE
             FileInputStream fis;
             ObjectInputStream ois;

@@ -40,13 +40,26 @@ public class ScheduleActivity extends AppCompatActivity {
                 //when day change get the events of the day
                 Date currentDate = new Date(year, month, dayOfMonth);
 
+                /*
+                 * Problème la currentDate.getDay() n'est pas pareil que dayOfMonth
+                 */
+
+                Log.d("esbarland", "année current event: " + currentDate.getYear());
+                Log.d("esbarland", "mois current event: " + currentDate.getMonth());
+                Log.d("esbarland", "day of the month: " + dayOfMonth);
+                Log.d("esbarland", "day current event: " + currentDate.getDay());
+
                 //list of the events of the selected date
                 final List<Event> listCurrentsEvents = new ArrayList<>();
 
                 for (Event event : listEvents) {
-                    if (event.getDate().equals(currentDate)) {
+                    Log.d("esbarland", "année event: " + event.getDate().getYear());
+                    Log.d("esbarland", "mois event: " + event.getDate().getMonth());
+                    Log.d("esbarland", "day event: " + event.getDate().getDay());
+
+                    //if (event.getDate().equals(currentDate)) {
                         listCurrentsEvents.add(event);
-                    }
+                    //}
                 }
                 EventAdapter adapter = new EventAdapter(context, listCurrentsEvents);
                 listViewEvents.setAdapter(adapter);

@@ -1,6 +1,7 @@
 package com.example.lokigroupmanager.Adapters;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,9 @@ import android.widget.TextView;
 import com.example.lokigroupmanager.Modele.Event;
 import com.example.lokigroupmanager.R;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class EventAdapter extends ArrayAdapter<Event> {
     private final Activity context;
@@ -26,7 +29,7 @@ public class EventAdapter extends ArrayAdapter<Event> {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
         // RISQUE DE CRASH
-        View view = inflater.inflate(R.layout.event_list_item, null, true);
+        View view = inflater.inflate(R.layout.event_list_item, null, false);
 
         TextView nameTextView = view.findViewById(R.id.nameEventView);
         TextView placeTextView = view.findViewById(R.id.placeEventView);
@@ -36,7 +39,12 @@ public class EventAdapter extends ArrayAdapter<Event> {
 
         nameTextView.setText(currentEvent.getNameEvent());
         placeTextView.setText(currentEvent.getPlace());
-        datelTextView.setText(currentEvent.getDate().getDay() + "/" + currentEvent.getDate().getMonth() + "/" + currentEvent.getDate().getYear());
+        //datelTextView.setText(currentEvent.getDate().getDay() + "/" + currentEvent.getDate().getMonth()+1 + "/" + currentEvent.getDate().getYear());
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy", Locale.FRANCE);
+
+        String resultDate = formatter.format(currentEvent.getDate());
+        datelTextView.setText(resultDate);
 
         return view;
     }

@@ -72,9 +72,11 @@ public class StubDataManager implements ILoaderGroup, ILoaderEvent {
     public List<Event> loadEvents() {
         final List<Event> listEvents = new ArrayList<>();
 
-        listEvents.add(new Event("gouter", "manger des gateaux", "maison", new Date(2019, 2, 8)));
-        listEvents.add(new Event("cinema", "regarder un film", "cinéma", new Date(2019, 2, 12)));
-        listEvents.add(new Event("bk", "manger fast food", "bk", new Date(2019, 2, 8)));
+        // 119 = 2019
+        // pour mettre un mois faire -1 par rapport au calendrier normal exemple : mars = 02 et pas 03
+        listEvents.add(new Event("gouter", "manger des gateaux", "maison", new Date(119, 2, 8)));
+        listEvents.add(new Event("cinema", "regarder un film", "cinéma", new Date(119, 2, 12)));
+        listEvents.add(new Event("bk", "manger fast food", "bk", new Date(119, 2, 8)));
 
         return listEvents;
     }
