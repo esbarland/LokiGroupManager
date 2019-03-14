@@ -4,10 +4,14 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.CalendarView;
 import android.widget.ListView;
 
 import com.example.lokigroupmanager.Adapters.EventAdapter;
+import com.example.lokigroupmanager.Dialogs.EventInfoDialog;
+import com.example.lokigroupmanager.Dialogs.UserInfoDialog;
 import com.example.lokigroupmanager.Modele.Event;
 import com.example.lokigroupmanager.Persistence.StubDataManager;
 import com.example.lokigroupmanager.R;
@@ -40,30 +44,35 @@ public class ScheduleActivity extends AppCompatActivity {
                 //when day change get the events of the day
                 Date currentDate = new Date(year, month, dayOfMonth);
 
-                /*
-                 * Problème la currentDate.getDay() n'est pas pareil que dayOfMonth
-                 */
-
-                Log.d("esbarland", "année current event: " + currentDate.getYear());
-                Log.d("esbarland", "mois current event: " + currentDate.getMonth());
-                Log.d("esbarland", "day of the month: " + dayOfMonth);
-                Log.d("esbarland", "day current event: " + currentDate.getDay());
 
                 //list of the events of the selected date
                 final List<Event> listCurrentsEvents = new ArrayList<>();
 
                 for (Event event : listEvents) {
-                    Log.d("esbarland", "année event: " + event.getDate().getYear());
-                    Log.d("esbarland", "mois event: " + event.getDate().getMonth());
-                    Log.d("esbarland", "day event: " + event.getDate().getDay());
+                    Log.d("esbarland", "day event: " + event.getDate().getDate());
 
-                    //if (event.getDate().equals(currentDate)) {
+
+
+                    if (currentDate.getYear()-1900 == event.getDate().getYear() && currentDate.getMonth() == event.getDate().getMonth() && currentDate.getDate() == event.getDate().getDate()) {
                         listCurrentsEvents.add(event);
-                    //}
+                    }
                 }
                 EventAdapter adapter = new EventAdapter(context, listCurrentsEvents);
                 listViewEvents.setAdapter(adapter);
 
+
+                listViewEvents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Bundle event = new Bundle();
+                        event.putParcelable("event", listCurrentsEvents.get(position));
+                        event.putInt("pos", position);
+
+                        EventInfoDialog eventInfoDialog = new EventInfoDialog();
+                        eventInfoDialog.setArguments(event);
+                        eventInfoDialog.show(getSupportFragmentManager(), EventInfoDialog.TAG);
+                    }
+                });
 
             }
         });

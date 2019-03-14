@@ -63,4 +63,9 @@
         completions."
     </string>
     <string name="group_user">Group</string>
+    <string name="eventname">Name:</string>
+    <string name="eventplace">Place:</string>
+    <string name="eventdate">Date:</string>
+    <string name="eventdescription">Description:</string>
+    <string name="eventdetails">Details</string>
 </resources>

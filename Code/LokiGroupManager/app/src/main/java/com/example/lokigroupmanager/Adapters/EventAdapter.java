@@ -38,9 +38,8 @@ public class EventAdapter extends ArrayAdapter<Event> {
         Event currentEvent = listEvents.get(position);
 
         nameTextView.setText(currentEvent.getNameEvent());
-        placeTextView.setText(currentEvent.getPlace());
-        //datelTextView.setText(currentEvent.getDate().getDay() + "/" + currentEvent.getDate().getMonth()+1 + "/" + currentEvent.getDate().getYear());
 
+        //Formattage de la date mais langue en dur
         SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy", Locale.FRANCE);
 
         String resultDate = formatter.format(currentEvent.getDate());

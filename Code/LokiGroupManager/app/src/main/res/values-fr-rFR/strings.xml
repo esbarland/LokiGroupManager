@@ -49,4 +49,9 @@
     <string name="schedule_title">Emploi du temps</string>
     <string name="reminder_title">Liste des rappels</string>
     <string name="title_activity_reminder">Rappels</string>
+    <string name="eventname">Nom:</string>
+    <string name="eventplace">Lieu:</string>
+    <string name="eventdate">Date:</string>
+    <string name="eventdescription">Description:</string>
+    <string name="eventdetails">Détails</string>
 </resources>
