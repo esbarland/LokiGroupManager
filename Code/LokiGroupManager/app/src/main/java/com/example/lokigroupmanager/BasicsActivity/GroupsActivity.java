@@ -15,6 +15,7 @@ import com.example.lokigroupmanager.Persistence.StubDataManager;
 import com.example.lokigroupmanager.R;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class GroupsActivity extends AppCompatActivity implements AddGroupDialog.AddGroupDialogListener {
@@ -39,7 +40,6 @@ public class GroupsActivity extends AppCompatActivity implements AddGroupDialog.
         });
 
         listViewGroups = findViewById(R.id.listGroups);
-
         // Stub
         StubDataManager stub = new StubDataManager();
         listGroups = stub.loadGroups();

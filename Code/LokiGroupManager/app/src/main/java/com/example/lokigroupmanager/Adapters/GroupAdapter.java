@@ -32,21 +32,16 @@ public class GroupAdapter extends ArrayAdapter<Group> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        // RISQUE DE CRASH
         View view = inflater.inflate(R.layout.group_list_item, null, true);
 
-        TextView groupView = view.findViewById(R.id.groupView);
-        ListView listViewGroup = view.findViewById(R.id.listView);
+        TextView groupView = view.findViewById(R.id.nameGroupItemView);
+        TextView descriptionGroup = view.findViewById(R.id.descriptionGroupItemView);
 
         Group group = listGroups.get(position);
 
         groupView.setText(group.getGroupName());
-        List<User> listUserPerGroup = (List<User>) group.getListUsers();
-        UserAdapter userAdapter = new UserAdapter(context, listUserPerGroup);
-        listViewGroup.setAdapter(userAdapter);
+        descriptionGroup.setText(group.getDescription());
 
         return view;
-
-
     }
 }

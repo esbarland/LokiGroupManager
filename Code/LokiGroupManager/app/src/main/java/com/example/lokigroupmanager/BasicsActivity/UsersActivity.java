@@ -1,9 +1,13 @@
 package com.example.lokigroupmanager.BasicsActivity;
 
 import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -11,6 +15,7 @@ import android.widget.ListView;
 import com.example.lokigroupmanager.Adapters.UserAdapter;
 import com.example.lokigroupmanager.Dialogs.AddUserDialog;
 import com.example.lokigroupmanager.Dialogs.UserInfoDialog;
+import com.example.lokigroupmanager.HardwareEvent.ShakeEvent;
 import com.example.lokigroupmanager.Modele.User;
 import com.example.lokigroupmanager.R;
 
@@ -25,6 +30,10 @@ public class UsersActivity extends AppCompatActivity implements AddUserDialog.Ad
     private ListView listViewUsers;
     private ArrayList<User> listAllUsers = new ArrayList<>();
     private UserAdapter adapter;
+
+    private SensorManager sensorManager;
+    private Sensor accelerometer;
+    private ShakeEvent shakeEvent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +97,17 @@ public class UsersActivity extends AppCompatActivity implements AddUserDialog.Ad
                 userInfoDialog.show(getSupportFragmentManager(), "user_info");
             }
         });
+
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        shakeEvent = new ShakeEvent();
+        shakeEvent.setOnShakeListener(new ShakeEvent.OnShakeListener() {
+
+            @Override
+            public void onShake(int count) {
+                Log.w("SHAKE", "shake event");
+            }
+        });
     }
 
     @Override
@@ -147,4 +167,6 @@ public class UsersActivity extends AppCompatActivity implements AddUserDialog.Ad
         listAllUsers.remove(bundle.getInt("pos"));
         adapter.notifyDataSetChanged();
     }
+
+
 }
