@@ -31,10 +31,6 @@ public class UsersActivity extends AppCompatActivity implements AddUserDialog.Ad
     private ArrayList<User> listAllUsers = new ArrayList<>();
     private UserAdapter adapter;
 
-    private SensorManager sensorManager;
-    private Sensor accelerometer;
-    private ShakeEvent shakeEvent;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,13 +94,10 @@ public class UsersActivity extends AppCompatActivity implements AddUserDialog.Ad
             }
         });
 
-        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        shakeEvent = new ShakeEvent();
+        ShakeEvent shakeEvent = new ShakeEvent((SensorManager) getSystemService(Context.SENSOR_SERVICE));
         shakeEvent.setOnShakeListener(new ShakeEvent.OnShakeListener() {
-
             @Override
-            public void onShake(int count) {
+            public void onShake() {
                 Log.w("SHAKE", "shake event");
             }
         });

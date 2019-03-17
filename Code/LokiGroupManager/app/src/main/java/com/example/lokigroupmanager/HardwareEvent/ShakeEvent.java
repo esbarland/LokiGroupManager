@@ -4,53 +4,81 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.util.Log;
 
 public class ShakeEvent implements SensorEventListener {
 
     public interface OnShakeListener {
-        void onShake(int count);
+        void onShake();
     }
 
-    private static final float SHAKE_MINIMUM_GRAVITY = 2.7F;
-    private static final int SHAKE_SLOP_TIME_MS = 500;
-    private static final int SHAKE_COUNT_RESET_TIME_MS = 3000;
-
     private OnShakeListener listener;
-    private long mShakeTimestamp;
-    private int mShakeCount;
 
     public void setOnShakeListener(OnShakeListener listener) {
         this.listener = listener;
     }
 
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    boolean firstUpdate = true;
+    boolean shake = false;
+
+    private static final float SHAKE_THRESHOLD = 12.5f;
+    private long lastUpdate = System.currentTimeMillis();
+
+    private float x, y, z;
+    private float last_x, last_y, last_z;
+
+    SensorManager sm;
+    Sensor accelerometer;
+
+    public ShakeEvent(SensorManager sm){
+        this.sm = sm;
+        accelerometer = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        sm.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        if (listener != null) {
-            float gX = event.values[0] / SensorManager.GRAVITY_EARTH;
-            float gY = event.values[1] / SensorManager.GRAVITY_EARTH;
-            float gZ = event.values[2] / SensorManager.GRAVITY_EARTH;
-            float gForce = (float) Math.sqrt(gX * gX + gY * gY + gZ * gZ);
-
-            if (gForce > SHAKE_MINIMUM_GRAVITY) {
-                final long now = System.currentTimeMillis();
-                // ignore shake events too close to each other (500ms)
-                if (mShakeTimestamp + SHAKE_SLOP_TIME_MS > now) {
-                    return;
-                }
-
-                // reset the shake count after 3 seconds of no shakes
-                if (mShakeTimestamp + SHAKE_COUNT_RESET_TIME_MS < now) {
-                    mShakeCount = 0;
-                }
-                mShakeTimestamp = now;
-                mShakeCount++;
-
-                listener.onShake(mShakeCount);
-            }
+        long curTime = System.currentTimeMillis();
+        updateValues(event.values[0], event.values[1], event.values[2]);
+        if((!shake) && isAccelerationChanged()){
+            shake = true;
         }
+        else if((shake) && isAccelerationChanged()){
+            listener.onShake();
+        }
+        else if((shake) && !isAccelerationChanged()){
+            shake = false;
+        }
+    }
+
+    private boolean isAccelerationChanged() {
+        float dX = Math.abs(last_x - x);
+        float dY = Math.abs(last_y - y);
+        float dZ = Math.abs(last_z - z);
+        return  (dX > SHAKE_THRESHOLD && dY > SHAKE_THRESHOLD) ||
+                (dX > SHAKE_THRESHOLD && dZ > SHAKE_THRESHOLD) ||
+                (dY > SHAKE_THRESHOLD && dZ > SHAKE_THRESHOLD);
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
+
+    public void updateValues(float xNew, float yNew, float zNew){
+        if(firstUpdate){
+            last_x = xNew;
+            last_y = yNew;
+            last_z = zNew;
+            firstUpdate = false;
+        }
+        else {
+            last_x = x;
+            last_y = y;
+            last_z = z;
+        }
+        x = xNew;
+        y = yNew;
+        z = zNew;
     }
 }
