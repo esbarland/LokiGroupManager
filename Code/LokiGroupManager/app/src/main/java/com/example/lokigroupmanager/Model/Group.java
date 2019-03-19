@@ -1,4 +1,4 @@
-package com.example.lokigroupmanager.Modele;
+package com.example.lokigroupmanager.Model;
 
 import java.io.Serializable;
 import java.util.Collection;

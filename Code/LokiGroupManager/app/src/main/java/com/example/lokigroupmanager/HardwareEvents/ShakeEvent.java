@@ -1,10 +1,9 @@
-package com.example.lokigroupmanager.HardwareEvent;
+package com.example.lokigroupmanager.HardwareEvents;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.util.Log;
 
 public class ShakeEvent implements SensorEventListener {
 
@@ -17,12 +16,14 @@ public class ShakeEvent implements SensorEventListener {
     public void setOnShakeListener(OnShakeListener listener) {
         this.listener = listener;
     }
+    public void removeOnShakeListener() { sm.unregisterListener(this); }
 
     boolean firstUpdate = true;
     boolean shake = false;
 
-    private static final float SHAKE_THRESHOLD = 12.5f;
+    private static float SHAKE_THRESHOLD = 4f; // A TESTER SUR D'AUTRES TELEPHONES
     private long lastUpdate = System.currentTimeMillis();
+    private static final long SHAKE_UPDATE_LIMITER = 1000l;
 
     private float x, y, z;
     private float last_x, last_y, last_z;
@@ -39,15 +40,16 @@ public class ShakeEvent implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent event) {
         long curTime = System.currentTimeMillis();
-        updateValues(event.values[0], event.values[1], event.values[2]);
-        if((!shake) && isAccelerationChanged()){
-            shake = true;
-        }
-        else if((shake) && isAccelerationChanged()){
-            listener.onShake();
-        }
-        else if((shake) && !isAccelerationChanged()){
-            shake = false;
+        if(curTime - lastUpdate > SHAKE_UPDATE_LIMITER) {
+            updateValues(event.values[0], event.values[1], event.values[2]);
+            if ((!shake) && isAccelerationChanged()) {
+                shake = true;
+            } else if ((shake) && isAccelerationChanged()) {
+                listener.onShake();
+            } else /*if ((shake) && !isAccelerationChanged())*/ {
+                shake = false;
+            }
+            lastUpdate = curTime;
         }
     }
 

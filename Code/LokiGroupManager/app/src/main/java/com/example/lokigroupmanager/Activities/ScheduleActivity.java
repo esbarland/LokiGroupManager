@@ -1,4 +1,4 @@
-package com.example.lokigroupmanager.BasicsActivity;
+package com.example.lokigroupmanager.Activities;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -11,8 +11,7 @@ import android.widget.ListView;
 
 import com.example.lokigroupmanager.Adapters.EventAdapter;
 import com.example.lokigroupmanager.Dialogs.EventInfoDialog;
-import com.example.lokigroupmanager.Dialogs.UserInfoDialog;
-import com.example.lokigroupmanager.Modele.Event;
+import com.example.lokigroupmanager.Model.Event;
 import com.example.lokigroupmanager.Persistence.StubDataManager;
 import com.example.lokigroupmanager.R;
 

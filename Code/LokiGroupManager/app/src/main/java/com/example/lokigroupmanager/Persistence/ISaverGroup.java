@@ -1,6 +1,6 @@
 package com.example.lokigroupmanager.Persistence;
 
-import com.example.lokigroupmanager.Modele.Group;
+import com.example.lokigroupmanager.Model.Group;
 
 import java.util.List;
 

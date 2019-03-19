@@ -25,6 +25,7 @@
     <string name="surname">Prénom</string>
     <string name="email">Email</string>
     <string name="save">Sauvegarder</string>
+    <string name="user_sort">Utilisateurs triés !</string>
 
     <!-- Group Activity -->
     <string name="groupname">Nom du groupe</string>

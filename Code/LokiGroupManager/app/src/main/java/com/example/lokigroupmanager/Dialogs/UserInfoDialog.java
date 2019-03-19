@@ -8,7 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.widget.TextView;
 
-import com.example.lokigroupmanager.Modele.User;
+import com.example.lokigroupmanager.Model.User;
 import com.example.lokigroupmanager.R;
 
 public class UserInfoDialog extends DialogFragment {
@@ -25,7 +25,7 @@ public class UserInfoDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Get the user selected
-        user = getArguments().getParcelable("user");
+        user = (User) getArguments().getSerializable("user");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 

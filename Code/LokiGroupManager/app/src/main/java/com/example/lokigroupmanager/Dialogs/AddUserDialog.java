@@ -39,6 +39,7 @@ public class AddUserDialog extends DialogFragment {
     @Override
     public void onStart() {
         super.onStart();
+        super.onStart();
         final Dialog dialog = getDialog();
         if (dialog != null) {
             int width = ViewGroup.LayoutParams.MATCH_PARENT;

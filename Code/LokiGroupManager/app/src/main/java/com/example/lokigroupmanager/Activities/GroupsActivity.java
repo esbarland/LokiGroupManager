@@ -1,21 +1,19 @@
-package com.example.lokigroupmanager.BasicsActivity;
+package com.example.lokigroupmanager.Activities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.lokigroupmanager.Adapters.GroupAdapter;
 import com.example.lokigroupmanager.Dialogs.AddGroupDialog;
-import com.example.lokigroupmanager.Modele.Group;
-import com.example.lokigroupmanager.Modele.User;
+import com.example.lokigroupmanager.Model.Group;
+import com.example.lokigroupmanager.Model.User;
 import com.example.lokigroupmanager.Persistence.StubDataManager;
 import com.example.lokigroupmanager.R;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class GroupsActivity extends AppCompatActivity implements AddGroupDialog.AddGroupDialogListener {

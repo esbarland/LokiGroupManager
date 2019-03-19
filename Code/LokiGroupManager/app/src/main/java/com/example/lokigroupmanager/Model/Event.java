@@ -1,4 +1,4 @@
-package com.example.lokigroupmanager.Modele;
+package com.example.lokigroupmanager.Model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

@@ -14,12 +14,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.lokigroupmanager.BasicsActivity.GroupsActivity;
-import com.example.lokigroupmanager.BasicsActivity.ReminderActivity;
-import com.example.lokigroupmanager.BasicsActivity.ScheduleActivity;
-import com.example.lokigroupmanager.BasicsActivity.UsersActivity;
-import com.example.lokigroupmanager.OptionsActivity.AboutUsActivity;
-import com.example.lokigroupmanager.OptionsActivity.SettingsActivity;
+import com.example.lokigroupmanager.Activities.GroupsActivity;
+import com.example.lokigroupmanager.Activities.ReminderActivity;
+import com.example.lokigroupmanager.Activities.ScheduleActivity;
+import com.example.lokigroupmanager.Activities.UsersActivity;
+import com.example.lokigroupmanager.Activities.AboutUsActivity;
+import com.example.lokigroupmanager.Activities.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

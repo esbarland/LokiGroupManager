@@ -1,13 +1,11 @@
-package com.example.lokigroupmanager.BasicsActivity;
+package com.example.lokigroupmanager.Activities;
 
 import android.content.Context;
-import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -15,8 +13,8 @@ import android.widget.ListView;
 import com.example.lokigroupmanager.Adapters.UserAdapter;
 import com.example.lokigroupmanager.Dialogs.AddUserDialog;
 import com.example.lokigroupmanager.Dialogs.UserInfoDialog;
-import com.example.lokigroupmanager.HardwareEvent.ShakeEvent;
-import com.example.lokigroupmanager.Modele.User;
+import com.example.lokigroupmanager.HardwareEvents.ShakeEvent;
+import com.example.lokigroupmanager.Model.User;
 import com.example.lokigroupmanager.R;
 
 import java.io.FileInputStream;
@@ -24,18 +22,22 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class UsersActivity extends AppCompatActivity implements AddUserDialog.AddUserDialogListener, UserInfoDialog.UserDeleteDialogListener {
 
     private ListView listViewUsers;
-    private ArrayList<User> listAllUsers = new ArrayList<>();
+    private List<User> listAllUsers = new ArrayList<>();
     private UserAdapter adapter;
+    private ShakeEvent shakeEvent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users);
 
+        // FLOATING ACTION BUTTON : ADD A USER
         FloatingActionButton fab = findViewById(R.id.add_user_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,22 +50,10 @@ public class UsersActivity extends AppCompatActivity implements AddUserDialog.Ad
         listViewUsers = findViewById(R.id.listUsers);
 
         if(savedInstanceState != null){
-            listAllUsers = savedInstanceState.getParcelableArrayList("users");
+            // IF PHONES ORIENTATION CHANGED
+            listAllUsers = (ArrayList<User>) savedInstanceState.getSerializable("users");
         }
         else {
-            /* STUB
-            StubDataManager stub = new StubDataManager();
-
-            List<Group> listGroups = stub.loadGroups();
-
-            listAllUsers = new ArrayList<>();
-
-            for (Group group : listGroups) {
-                listAllUsers.addAll(group.getListUsers());
-            }
-
-            */
-
             // RESTORE USERS LIST FROM INTERNAL STORAGE
             FileInputStream fis;
             ObjectInputStream ois;
@@ -81,31 +71,43 @@ public class UsersActivity extends AppCompatActivity implements AddUserDialog.Ad
         adapter = new UserAdapter(this, listAllUsers);
         listViewUsers.setAdapter(adapter);
 
+        // On item click listener of the user list
         listViewUsers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Bundle user = new Bundle();
-                user.putParcelable("user", listAllUsers.get(position));
+                // Put the user selected in a bundle
+                user.putSerializable("user", listAllUsers.get(position));
                 user.putInt("pos", position);
 
+                // Launch the info dialog with the bundle
                 UserInfoDialog userInfoDialog = new UserInfoDialog();
                 userInfoDialog.setArguments(user);
                 userInfoDialog.show(getSupportFragmentManager(), "user_info");
             }
         });
 
-        ShakeEvent shakeEvent = new ShakeEvent((SensorManager) getSystemService(Context.SENSOR_SERVICE));
+        // Start shake detection
+        final Snackbar sorted = Snackbar.make(findViewById(android.R.id.content), R.string.user_sort, Snackbar.LENGTH_SHORT);
+        shakeEvent = new ShakeEvent((SensorManager) getSystemService(Context.SENSOR_SERVICE));
         shakeEvent.setOnShakeListener(new ShakeEvent.OnShakeListener() {
             @Override
             public void onShake() {
-                Log.w("SHAKE", "shake event");
+                // Sort user list and notify the adapter
+                Collections.sort(listAllUsers);
+                adapter.notifyDataSetChanged();
+                sorted.show();
             }
         });
     }
 
+    /***
+     * Save the user list when the phone orientation change
+     * @param outState saved bundle
+     */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putParcelableArrayList("users", listAllUsers);
+        outState.putSerializable("users", (ArrayList<User>) listAllUsers);
         super.onSaveInstanceState(outState);
     }
 
@@ -129,6 +131,8 @@ public class UsersActivity extends AppCompatActivity implements AddUserDialog.Ad
         } catch (Exception e) {
             e.printStackTrace();
         }
+        // Stop shake detection
+        shakeEvent.removeOnShakeListener();
         super.onStop();
     }
 

@@ -1,14 +1,13 @@
 package com.example.lokigroupmanager.Dialogs;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.widget.TextView;
 
-import com.example.lokigroupmanager.Modele.Event;
+import com.example.lokigroupmanager.Model.Event;
 import com.example.lokigroupmanager.R;
 
 import java.text.SimpleDateFormat;

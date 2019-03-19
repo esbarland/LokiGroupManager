@@ -39,6 +39,7 @@
     <string name="surname">Surname</string>
     <string name="email">Email</string>
     <string name="save">Save</string>
+    <string name="user_sort">Users sorted !</string>
 
     <!-- Group Activity -->
     <string name="groupname">Group name</string>

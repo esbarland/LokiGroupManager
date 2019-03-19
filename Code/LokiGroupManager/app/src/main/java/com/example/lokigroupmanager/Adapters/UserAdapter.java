@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.lokigroupmanager.Modele.User;
+import com.example.lokigroupmanager.Model.User;
 import com.example.lokigroupmanager.R;
 
 import java.util.List;

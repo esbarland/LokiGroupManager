@@ -1,4 +1,4 @@
-package com.example.lokigroupmanager.OptionsActivity;
+package com.example.lokigroupmanager.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

@@ -1,8 +1,8 @@
 package com.example.lokigroupmanager.Persistence;
 
-import com.example.lokigroupmanager.Modele.Event;
-import com.example.lokigroupmanager.Modele.Group;
-import com.example.lokigroupmanager.Modele.User;
+import com.example.lokigroupmanager.Model.Event;
+import com.example.lokigroupmanager.Model.Group;
+import com.example.lokigroupmanager.Model.User;
 
 import java.util.ArrayList;
 import java.util.Date;
