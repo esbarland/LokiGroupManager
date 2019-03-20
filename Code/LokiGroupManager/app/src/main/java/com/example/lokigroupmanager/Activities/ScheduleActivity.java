@@ -2,6 +2,7 @@ package com.example.lokigroupmanager.Activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.CalendarView;
 import android.widget.ListView;
 
 import com.example.lokigroupmanager.Adapters.EventAdapter;
+import com.example.lokigroupmanager.Dialogs.AddEventDialog;
+import com.example.lokigroupmanager.Dialogs.AddUserDialog;
 import com.example.lokigroupmanager.Dialogs.EventInfoDialog;
 import com.example.lokigroupmanager.Model.Event;
 import com.example.lokigroupmanager.Persistence.StubDataManager;
@@ -19,21 +22,32 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ScheduleActivity extends AppCompatActivity {
+public class ScheduleActivity extends AppCompatActivity implements EventInfoDialog.EventDeleteDialogListener, AddEventDialog.AddEventDialogListener {
 
-    private CalendarView calendarView;
     private ListView listViewEvents;
+    private EventAdapter adapter;
+    private List<Event> listCurrentsEvents;
+    private List<Event> listEvents;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
 
-        calendarView = (CalendarView) findViewById(R.id.calendar);
+        FloatingActionButton fab = findViewById(R.id.add_event_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddEventDialog dialog = new AddEventDialog();
+                dialog.show(getSupportFragmentManager(), AddEventDialog.TAG);
+            }
+        });
+
+        CalendarView calendarView = (CalendarView) findViewById(R.id.calendar);
         listViewEvents = (ListView) findViewById(R.id.listEvents);
 
         StubDataManager stubDataManager = new StubDataManager();
-        final List<Event> listEvents = stubDataManager.loadEvents();
+        listEvents = stubDataManager.loadEvents();
 
         final Activity context = this;
 
@@ -45,18 +59,14 @@ public class ScheduleActivity extends AppCompatActivity {
 
 
                 //list of the events of the selected date
-                final List<Event> listCurrentsEvents = new ArrayList<>();
+                listCurrentsEvents = new ArrayList<>();
 
                 for (Event event : listEvents) {
-                    Log.d("esbarland", "day event: " + event.getDate().getDate());
-
-
-
-                    if (currentDate.getYear()-1900 == event.getDate().getYear() && currentDate.getMonth() == event.getDate().getMonth() && currentDate.getDate() == event.getDate().getDate()) {
+                    if (currentDate.getYear() - 1900 == event.getDate().getYear() && currentDate.getMonth() == event.getDate().getMonth() && currentDate.getDate() == event.getDate().getDate()) {
                         listCurrentsEvents.add(event);
                     }
                 }
-                EventAdapter adapter = new EventAdapter(context, listCurrentsEvents);
+                adapter = new EventAdapter(context, listCurrentsEvents);
                 listViewEvents.setAdapter(adapter);
 
 
@@ -64,7 +74,7 @@ public class ScheduleActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Bundle event = new Bundle();
-                        event.putParcelable("event", listCurrentsEvents.get(position));
+                        event.putSerializable("event", listCurrentsEvents.get(position));
                         event.putInt("pos", position);
 
                         EventInfoDialog eventInfoDialog = new EventInfoDialog();
@@ -77,6 +87,23 @@ public class ScheduleActivity extends AppCompatActivity {
         });
 
 
+    }
 
+    @Override
+    public void onDeleteDialog(Bundle bundle) {
+        // Remove the event from 2 lists and notify the adapter
+        listCurrentsEvents.remove(bundle.getInt("pos"));
+        listEvents.remove(bundle.getInt("pos"));
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onFinishAddDialog(Bundle bundle) {
+        if(bundle != null){
+            Event event = (Event) bundle.getSerializable("eventAdded");
+            listEvents.add(event);
+            adapter.notifyDataSetChanged();
+            Log.d("esbarland", "activty name" + event.getNameEvent());
+        }
     }
 }
