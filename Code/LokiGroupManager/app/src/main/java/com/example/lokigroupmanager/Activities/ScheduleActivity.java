@@ -1,6 +1,7 @@
 package com.example.lokigroupmanager.Activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -14,9 +15,14 @@ import com.example.lokigroupmanager.Adapters.EventAdapter;
 import com.example.lokigroupmanager.Dialogs.AddEventDialog;
 import com.example.lokigroupmanager.Dialogs.EventInfoDialog;
 import com.example.lokigroupmanager.Model.Event;
+import com.example.lokigroupmanager.Model.User;
 import com.example.lokigroupmanager.Persistence.StubDataManager;
 import com.example.lokigroupmanager.R;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,8 +32,7 @@ public class ScheduleActivity extends AppCompatActivity implements EventInfoDial
     private ListView listViewEvents;
     private EventAdapter adapter;
     private List<Event> listCurrentsEvents = new ArrayList<>();
-    ;
-    private List<Event> listEvents;
+    private List<Event> listEvents = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +48,27 @@ public class ScheduleActivity extends AppCompatActivity implements EventInfoDial
             }
         });
 
+        if (savedInstanceState != null) {
+            listEvents = (ArrayList<Event>) savedInstanceState.getSerializable("events");
+        } else {
+            FileInputStream fileInputStream;
+            ObjectInputStream objectInputStream;
+
+            try {
+                fileInputStream = openFileInput("events");
+                objectInputStream = new ObjectInputStream(fileInputStream);
+                listEvents = (ArrayList<Event>) objectInputStream.readObject();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         CalendarView calendarView = (CalendarView) findViewById(R.id.calendar);
         listViewEvents = (ListView) findViewById(R.id.listEvents);
 
         StubDataManager stubDataManager = new StubDataManager();
-        listEvents = stubDataManager.loadEvents();
+        //listEvents = stubDataManager.loadEvents();
+
 
         final Activity context = this;
 
@@ -57,6 +78,8 @@ public class ScheduleActivity extends AppCompatActivity implements EventInfoDial
                 //when day change get the events of the day
                 Date currentDate = new Date(year, month, dayOfMonth);
 
+                if (listEvents == null)
+                    return;
 
                 //list of the events of the selected date
                 listCurrentsEvents.clear();
@@ -89,6 +112,31 @@ public class ScheduleActivity extends AppCompatActivity implements EventInfoDial
         });
 
 
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putSerializable("events", (ArrayList<Event>) listEvents);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onStop() {
+        FileOutputStream fileOutputStream;
+        ObjectOutputStream outputStream;
+
+        try {
+            fileOutputStream = openFileOutput("events", Context.MODE_PRIVATE);
+            outputStream = new ObjectOutputStream(fileOutputStream);
+            outputStream.writeObject(listEvents);
+
+            outputStream.close();
+            fileOutputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        super.onStop();
     }
 
     @Override
