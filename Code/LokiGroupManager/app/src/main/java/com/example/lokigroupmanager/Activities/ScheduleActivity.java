@@ -12,7 +12,6 @@ import android.widget.ListView;
 
 import com.example.lokigroupmanager.Adapters.EventAdapter;
 import com.example.lokigroupmanager.Dialogs.AddEventDialog;
-import com.example.lokigroupmanager.Dialogs.AddUserDialog;
 import com.example.lokigroupmanager.Dialogs.EventInfoDialog;
 import com.example.lokigroupmanager.Model.Event;
 import com.example.lokigroupmanager.Persistence.StubDataManager;
@@ -26,7 +25,8 @@ public class ScheduleActivity extends AppCompatActivity implements EventInfoDial
 
     private ListView listViewEvents;
     private EventAdapter adapter;
-    private List<Event> listCurrentsEvents = new ArrayList<>();;
+    private List<Event> listCurrentsEvents = new ArrayList<>();
+    ;
     private List<Event> listEvents;
 
     @Override
@@ -94,14 +94,17 @@ public class ScheduleActivity extends AppCompatActivity implements EventInfoDial
     @Override
     public void onDeleteDialog(Bundle bundle) {
         // Remove the event from 2 lists and notify the adapter
-        listCurrentsEvents.remove(bundle.getInt("pos"));
-        //listEvents.remove(bundle.getInt("pos"));
+        Event event = listCurrentsEvents.get(bundle.getInt("pos"));
+
+        listCurrentsEvents.remove(event);
+        listEvents.remove(event);
+
         adapter.notifyDataSetChanged();
     }
 
     @Override
     public void onFinishAddDialog(Bundle bundle) {
-        if(bundle != null){
+        if (bundle != null) {
             Event event = (Event) bundle.getSerializable("eventAdded");
             listEvents.add(event);
 
