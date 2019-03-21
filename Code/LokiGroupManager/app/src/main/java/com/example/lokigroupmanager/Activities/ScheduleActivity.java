@@ -26,7 +26,7 @@ public class ScheduleActivity extends AppCompatActivity implements EventInfoDial
 
     private ListView listViewEvents;
     private EventAdapter adapter;
-    private List<Event> listCurrentsEvents;
+    private List<Event> listCurrentsEvents = new ArrayList<>();;
     private List<Event> listEvents;
 
     @Override
@@ -59,9 +59,11 @@ public class ScheduleActivity extends AppCompatActivity implements EventInfoDial
 
 
                 //list of the events of the selected date
-                listCurrentsEvents = new ArrayList<>();
+                listCurrentsEvents.clear();
 
                 for (Event event : listEvents) {
+                    Log.d("esbarland", "############################");
+                    Log.d("esbarland", "event name: " + event.getNameEvent());
                     if (currentDate.getYear() - 1900 == event.getDate().getYear() && currentDate.getMonth() == event.getDate().getMonth() && currentDate.getDate() == event.getDate().getDate()) {
                         listCurrentsEvents.add(event);
                     }
@@ -93,7 +95,7 @@ public class ScheduleActivity extends AppCompatActivity implements EventInfoDial
     public void onDeleteDialog(Bundle bundle) {
         // Remove the event from 2 lists and notify the adapter
         listCurrentsEvents.remove(bundle.getInt("pos"));
-        listEvents.remove(bundle.getInt("pos"));
+        //listEvents.remove(bundle.getInt("pos"));
         adapter.notifyDataSetChanged();
     }
 
@@ -102,8 +104,9 @@ public class ScheduleActivity extends AppCompatActivity implements EventInfoDial
         if(bundle != null){
             Event event = (Event) bundle.getSerializable("eventAdded");
             listEvents.add(event);
-            adapter.notifyDataSetChanged();
-            Log.d("esbarland", "activty name" + event.getNameEvent());
+
+            //adapter.notifyDataSetChanged();
+
         }
     }
 }

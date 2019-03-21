@@ -52,8 +52,8 @@ public class AddEventDialog extends DialogFragment {
             int height = ViewGroup.LayoutParams.MATCH_PARENT;
             dialog.getWindow().setLayout(width, height);
 
-            ImageButton close = getView().findViewById(R.id.add_event_close);
-            Button save = getView().findViewById(R.id.add_event_save);
+            ImageButton close = (ImageButton) getView().findViewById(R.id.add_event_close);
+            Button save = (Button) getView().findViewById(R.id.add_event_save);
 
             // Close button action
             close.setOnClickListener(new View.OnClickListener() {
@@ -74,25 +74,24 @@ public class AddEventDialog extends DialogFragment {
 
                     String name = nameEditText.getText().toString();
                     String place = placeEditText.getText().toString();
-                    Date date = new Date(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
+                    Date date = new Date(datePicker.getYear() - 1900, datePicker.getMonth(), datePicker.getDayOfMonth());
                     String description = descriptionEditText.getText().toString();
 
                     /*
                      * Crash à ce niveau passer les paramètres un par un au lieu de créer un event et de le passer
                      */
-                    if(name.equals("") || place.equals("") || description.equals("")){
+                    if (name.equals("") || place.equals("") || description.equals("")) {
                         Snackbar.make(getView(), getString(R.string.emptyfield), Snackbar.LENGTH_LONG).show();
-                    }else{
+                    } else {
                         Bundle infos = new Bundle();
                         Event event = new Event(name, description, place, date);
                         infos.putSerializable("eventAdded", event);
-                        Log.d("esbarland", "dialog name" + event.getNameEvent());
-                        AddEventDialog.AddEventDialogListener listener = (AddEventDialogListener) getActivity();
+
+                        AddEventDialogListener listener = (AddEventDialogListener) getActivity();
+                        assert listener != null;
                         listener.onFinishAddDialog(infos);
                         dismiss();
                     }
-
-
 
 
                 }

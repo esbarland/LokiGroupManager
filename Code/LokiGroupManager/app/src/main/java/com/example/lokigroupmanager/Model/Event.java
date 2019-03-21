@@ -35,4 +35,16 @@ public class Event implements Serializable {
         return date;
     }
 
+    @Override
+    public boolean equals(Object object) {
+        if (object == null) return false;
+
+        if (object == this) return true;
+
+        if (!(object instanceof Event)) return false;
+
+        Event event = (Event) object;
+
+        return event.getNameEvent().equals(this.getNameEvent()) && event.getDate() == this.getDate() && event.getPlace().equals(this.getPlace()) && event.getDescription().equals(this.getDescription());
+    }
 }
