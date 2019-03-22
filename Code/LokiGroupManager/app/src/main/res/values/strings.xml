@@ -32,7 +32,7 @@
     <string name="schedule_title">Schedule</string>
     <string name="reminder_title">Reminder list</string>
     <string name="title_activity_reminder">Reminder</string>
-    <string name="title_activity_login">Sign in</string>
+    <!--<string name="title_activity_login">Sign in</string>-->
 
     <!-- Users Activity -->
     <string name="firstname">First name</string>
@@ -44,14 +44,16 @@
     <!-- Group Activity -->
     <string name="groupname">Group name</string>
     <string name="description">Description</string>
+    <string name="group_sort">Groups sorted !</string>
 
     <!-- Actions -->
     <string name="delete">Delete</string>
+    <string name="modify_users">Modify members</string>
 
     <!-- Errors -->
     <string name="emptyfield">Error : Some fields are empty</string>
 
-    <!-- Strings related to login -->
+    <!-- Strings related to login
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -62,7 +64,7 @@
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
-    </string>
+    </string>-->
     <string name="group_user">Group</string>
     <string name="eventname">Name:</string>
     <string name="eventplace">Place:</string>

@@ -51,10 +51,11 @@ public class UsersActivity extends AppCompatActivity implements AddUserDialog.Ad
 
         if(savedInstanceState != null){
             // IF PHONES ORIENTATION CHANGED
+            // RESTORE USER LIST FROM onSaveInstanceState BUNDLE
             listAllUsers = (ArrayList<User>) savedInstanceState.getSerializable("users");
         }
         else {
-            // RESTORE USERS LIST FROM INTERNAL STORAGE
+            // RESTORE USER LIST FROM INTERNAL STORAGE
             FileInputStream fis;
             ObjectInputStream ois;
 
@@ -102,8 +103,8 @@ public class UsersActivity extends AppCompatActivity implements AddUserDialog.Ad
     }
 
     /***
-     * Save the user list when the phone orientation change
-     * @param outState saved bundle
+     * Save the user list in a temporary bundle when the phone orientation change
+     * @param outState saved bundle that is transfer to onCreate method
      */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -112,7 +113,7 @@ public class UsersActivity extends AppCompatActivity implements AddUserDialog.Ad
     }
 
     /***
-     * Save the users on stop
+     * Save the users on stop of the activity
      */
     @Override
     protected void onStop() {
@@ -164,6 +165,4 @@ public class UsersActivity extends AppCompatActivity implements AddUserDialog.Ad
         listAllUsers.remove(bundle.getInt("pos"));
         adapter.notifyDataSetChanged();
     }
-
-
 }

@@ -30,9 +30,11 @@
     <!-- Group Activity -->
     <string name="groupname">Nom du groupe</string>
     <string name="description">Description</string>
+    <string name="group_sort">Groupes triés !</string>
 
     <!-- Actions -->
     <string name="delete">Supprimer</string>
+    <string name="modify_users">Modifier les membres</string>
 
     <!-- Errors -->
     <string name="emptyfield">Erreur : Des champs sont vides</string>
@@ -50,6 +52,8 @@
     <string name="schedule_title">Emploi du temps</string>
     <string name="reminder_title">Liste des rappels</string>
     <string name="title_activity_reminder">Rappels</string>
+
+    <string name="group_user">Groupe</string>
     <string name="eventname">Nom:</string>
     <string name="eventplace">Lieu:</string>
     <string name="eventdate">Date:</string>
