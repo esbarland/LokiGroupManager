@@ -11,7 +11,10 @@ import android.widget.TextView;
 
 import com.example.lokigroupmanager.Adapters.UserAdapter;
 import com.example.lokigroupmanager.Model.Group;
+import com.example.lokigroupmanager.Model.User;
 import com.example.lokigroupmanager.R;
+
+import java.util.ArrayList;
 
 public class GroupInfoDialog extends DialogFragment {
     // Group to display
@@ -44,6 +47,11 @@ public class GroupInfoDialog extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Launch the user list tick boxes dialog
+                        Bundle b = new Bundle();
+                        b.putSerializable("groupUsers", (ArrayList<User>) group.getListUsers());
+                        EditGroupDialog editDialog = new EditGroupDialog();
+                        editDialog.setArguments(b);
+                        editDialog.show(getFragmentManager(), EditGroupDialog.TAG);
                     }
                 });
         return builder.create();
