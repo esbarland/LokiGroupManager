@@ -2,27 +2,37 @@ package com.example.lokigroupmanager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.ListView;
 
+import com.example.lokigroupmanager.Activities.AboutUsActivity;
 import com.example.lokigroupmanager.Activities.GroupsActivity;
 import com.example.lokigroupmanager.Activities.ReminderActivity;
 import com.example.lokigroupmanager.Activities.ScheduleActivity;
-import com.example.lokigroupmanager.Activities.UsersActivity;
-import com.example.lokigroupmanager.Activities.AboutUsActivity;
 import com.example.lokigroupmanager.Activities.SettingsActivity;
+import com.example.lokigroupmanager.Activities.UsersActivity;
+import com.example.lokigroupmanager.Adapters.UserAdapter;
+import com.example.lokigroupmanager.Model.User;
+
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private List<User> listAllUsers = new ArrayList<>();
+    private static final int USERS_DISPLAYED = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +49,45 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        FileInputStream fis;
+        ObjectInputStream ois;
+        try {
+            fis = openFileInput("users");
+            ois = new ObjectInputStream(fis);
+            listAllUsers = (ArrayList<User>) ois.readObject();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        List<User> listToDisplay = new ArrayList<>();
+        ListView listViewUsers = findViewById(R.id.listUsersMain);
+
+
+        if (listAllUsers.size() > USERS_DISPLAYED) {
+            for (int i = listAllUsers.size() - 1; i >= listAllUsers.size() - USERS_DISPLAYED; i--) {
+                listToDisplay.add(listAllUsers.get(i));
+            }
+        } else {
+            listToDisplay.addAll(listAllUsers);
+            listToDisplay = reverseList(listToDisplay);
+        }
+
+        for (User user : listToDisplay
+        ) {
+            Log.d("esbarland" +
+                    "", user.getFirstname());
+        }
+
+        UserAdapter adapter = new UserAdapter(this, listToDisplay);
+        listViewUsers.setAdapter(adapter);
+
+    }
+
+    public List<User> reverseList(List<User> list) {
+        List<User> reverse = new ArrayList<>(list);
+        Collections.reverse(reverse);
+        return reverse;
     }
 
     @Override
@@ -84,7 +133,7 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        switch(id){
+        switch (id) {
             case R.id.nav_users:
                 break;
             case R.id.nav_groups:
@@ -126,6 +175,7 @@ public class MainActivity extends AppCompatActivity
 
     /**
      * Event handle when press on settings option
+     *
      * @param item Menu
      */
     public void clickeventSettings(MenuItem item) {
@@ -135,6 +185,7 @@ public class MainActivity extends AppCompatActivity
 
     /**
      * Event handle when press on about us option
+     *
      * @param item Menu
      */
     public void clickeventAboutUs(MenuItem item) {
@@ -144,6 +195,7 @@ public class MainActivity extends AppCompatActivity
 
     /**
      * Event handle when press on users option
+     *
      * @param item Menu
      */
     public void clickeventUsers(MenuItem item) {
@@ -153,6 +205,7 @@ public class MainActivity extends AppCompatActivity
 
     /**
      * Event handle when press on groups option
+     *
      * @param item Menu
      */
     public void clickeventGroups(MenuItem item) {
@@ -162,6 +215,7 @@ public class MainActivity extends AppCompatActivity
 
     /**
      * Event handle when press on schedule option
+     *
      * @param item Menu
      */
     public void clickeventSchedule(MenuItem item) {
@@ -171,6 +225,7 @@ public class MainActivity extends AppCompatActivity
 
     /**
      * Event handle when press on reminder option
+     *
      * @param item Menu
      */
     public void clickeventReminder(MenuItem item) {

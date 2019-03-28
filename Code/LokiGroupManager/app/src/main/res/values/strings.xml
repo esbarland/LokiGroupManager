@@ -71,4 +71,5 @@
     <string name="eventdate">Date:</string>
     <string name="eventdescription">Description:</string>
     <string name="eventdetails">Details</string>
+    <string name="last_users">Last Users:</string>
 </resources>

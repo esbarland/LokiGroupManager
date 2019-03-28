@@ -59,4 +59,5 @@
     <string name="eventdate">Date:</string>
     <string name="eventdescription">Description:</string>
     <string name="eventdetails">Détails</string>
+    <string name="last_users">Dernier utilisateurs:</string>
 </resources>
