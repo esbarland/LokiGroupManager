@@ -28,7 +28,7 @@ public class EditGroupAdapter extends ArrayAdapter<User> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View view = inflater.inflate(R.layout.user_selection_list_item, null, true);
+        View view = inflater.inflate(R.layout.user_selection_list_item, null, false);
 
         TextView nameTextView = view.findViewById(R.id.nameViewSelection);
 
