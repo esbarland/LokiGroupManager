@@ -7,6 +7,7 @@ import java.io.Serializable;
 public class User implements Serializable, Comparable<User> {
     private static final long serialVersionUID = 571475165L;
 
+    private boolean isSelected = false;
     private String firstname;
     private String surname;
     private String email;
@@ -39,6 +40,14 @@ public class User implements Serializable, Comparable<User> {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setSelected(boolean state){
+        isSelected = state;
+    }
+
+    public boolean selected() {
+        return isSelected;
     }
 
     @Override
