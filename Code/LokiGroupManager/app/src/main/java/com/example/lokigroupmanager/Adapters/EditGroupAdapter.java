@@ -15,7 +15,12 @@ import java.util.List;
 
 public class EditGroupAdapter extends ArrayAdapter<User> {
     private final Activity context;
-    private final List<User> userList;
+    private List<User> userList;
+
+    class ViewHolder {
+        CheckBox checkBox;
+        TextView textView;
+    }
 
     public EditGroupAdapter(Activity context, List<User> objects) {
         super(context, R.layout.user_selection_list_item, objects);
@@ -28,14 +33,36 @@ public class EditGroupAdapter extends ArrayAdapter<User> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
+<<<<<<< HEAD
+        ViewHolder holder = null;
+=======
         View view = inflater.inflate(R.layout.user_selection_list_item, null, false);
+>>>>>>> a48f4fd7f7b3787fa566eac132fe8c2617552d96
 
-        TextView nameTextView = view.findViewById(R.id.nameViewSelection);
+        if (convertView == null) {
+            convertView = inflater.inflate(R.layout.user_selection_list_item, null, true);
+            holder = new ViewHolder();
+            holder.checkBox = convertView.findViewById(R.id.checkBoxSelection);
+            holder.textView = convertView.findViewById(R.id.nameViewSelection);
+            convertView.setTag(holder);
+        }
+        else
+            holder = (ViewHolder) convertView.getTag();
 
         User currentUser = userList.get(position);
+        String fullname = currentUser.getFirstname()+" "+currentUser.getSurname();
+        holder.textView.setText(fullname);
 
-        nameTextView.setText(currentUser.getFirstname()+" "+currentUser.getSurname());
+        if(currentUser.selected())
+            holder.checkBox.setChecked(true);
+        else
+            holder.checkBox.setChecked(false);
 
-        return view;
+        return convertView;
+    }
+
+    public void updateAdapter(List<User> userList){
+        this.userList = userList;
+        notifyDataSetChanged();
     }
 }

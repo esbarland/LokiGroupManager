@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,9 +30,10 @@ public class EditGroupDialog extends DialogFragment {
     private List<User> allUsers = new ArrayList<>();
     private List<User> usersSelected = new ArrayList<>();
     private ListView list;
+    private EditGroupAdapter adapter;
 
     // Interface to send and receive data from the dialog to the activity
-    public interface EditGrouopdialogListener {
+    public interface EditGroupDialogListener {
         void onFinishEditDialog(Bundle bundle);
     }
 
@@ -46,6 +48,49 @@ public class EditGroupDialog extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         final View view = inflater.inflate(R.layout.edit_group_dialog, container, false);
+
+        // Get the Button components from the view
+        ImageButton close = view.findViewById(R.id.edit_group_close);
+        Button save = view.findViewById(R.id.edit_group_save);
+        list = view.findViewById(R.id.editGroupListView);
+        adapter = new EditGroupAdapter(getActivity(), allUsers);
+        list.setAdapter(adapter);
+
+        // Marche pas :'(
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+                User user = allUsers.get(position);
+                if(user.selected()){
+                    user.setSelected(false);
+                    Log.w("check", user+": false");
+                }
+                else{
+                    user.setSelected(true);
+                    Log.w("check", user+": true");
+                }
+
+                allUsers.set(position, user);
+                adapter.updateAdapter(allUsers);
+            }
+        });
+
+        // Close button behavior
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getDialog().dismiss();
+            }
+        });
+
+        // Save button behavior
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         return view;
     }
 
@@ -68,43 +113,7 @@ public class EditGroupDialog extends DialogFragment {
                 e.printStackTrace();
             }
             usersSelected = (ArrayList<User>) getArguments().getSerializable("groupUsers");
-
-            // Get the Button components from the view
-            ImageButton close = getView().findViewById(R.id.edit_group_close);
-            Button save = getView().findViewById(R.id.edit_group_save);
-            list = getView().findViewById(R.id.editGroupListView);
-
-            EditGroupAdapter adapter = new EditGroupAdapter(getActivity(), allUsers);
-            list.setAdapter(adapter);
-            updateCheckBoxes(adapter);
-
-            // Marche pas :'(
-            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-                    CheckBox cb = view.findViewById(R.id.checkBoxSelection);
-                    if(cb.isChecked())
-                        cb.setChecked(false);
-                    else
-                        cb.setChecked(true);
-                }
-            });
-
-            // Close button behavior
-            close.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    getDialog().dismiss();
-                }
-            });
-
-            // Save button behavior
-            save.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
+            adapter.notifyDataSetChanged();
         }
     }
 
@@ -117,5 +126,9 @@ public class EditGroupDialog extends DialogFragment {
             }
         }
         adapter.notifyDataSetChanged();
+    }
+
+    private void getCheckedUsers(){
+
     }
 }

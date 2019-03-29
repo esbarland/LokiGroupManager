@@ -69,8 +69,8 @@ public class GroupsActivity extends AppCompatActivity implements AddGroupDialog.
                 e.printStackTrace();
             }
         }
-        StubDataManager sm = new StubDataManager();
-        listGroups = sm.loadGroups();
+        //StubDataManager sm = new StubDataManager();
+        //listGroups = sm.loadGroups();
 
         // Array Adapter
         adapter = new GroupAdapter(this, listGroups);
