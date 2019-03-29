@@ -26,7 +26,7 @@ public class UserAdapter extends ArrayAdapter<User> {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
         // RISQUE DE CRASH
-        View view = inflater.inflate(R.layout.user_list_item, null, true);
+        View view = inflater.inflate(R.layout.user_list_item, null, false);
 
         TextView nameTextView = view.findViewById(R.id.nameView);
         TextView emailTextView = view.findViewById(R.id.emailView);

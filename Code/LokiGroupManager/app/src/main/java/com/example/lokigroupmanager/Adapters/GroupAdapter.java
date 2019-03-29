@@ -28,7 +28,7 @@ public class GroupAdapter extends ArrayAdapter<Group> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View view = inflater.inflate(R.layout.group_list_item, null, true);
+        View view = inflater.inflate(R.layout.group_list_item, null, false);
 
         TextView groupView = view.findViewById(R.id.nameGroupItemView);
         TextView descriptionGroup = view.findViewById(R.id.descriptionGroupItemView);

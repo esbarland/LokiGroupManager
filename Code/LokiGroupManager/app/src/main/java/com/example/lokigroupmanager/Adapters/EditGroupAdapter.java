@@ -33,7 +33,11 @@ public class EditGroupAdapter extends ArrayAdapter<User> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
+<<<<<<< HEAD
         ViewHolder holder = null;
+=======
+        View view = inflater.inflate(R.layout.user_selection_list_item, null, false);
+>>>>>>> a48f4fd7f7b3787fa566eac132fe8c2617552d96
 
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.user_selection_list_item, null, true);
